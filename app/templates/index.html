@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Releases by Year</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style_predict.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="container">
+            <!-- <script>
+                $(function () {
+                    $(".nav-bar").load("nav.html");
+                });
+            </script> -->
+
+            <div class="nav-bar">
+                <div class="nav-bar">
+                    <ul class="ul-nav">
+                        <li id="predict" class="li-nav"><a id="predictId" href="#" class="a-nav">Predict</a></li>
+                        <li id="plot" class="li-nav">
+                            <a href="#" class="a-nav">Plot</a>
+                            <ul class="dropdown">
+                                <li><button id="plot-all">Thống kê số lượng phim theo từng thể loại, quốc gia</button>
+                                </li>
+                                <li><button id="plot-count-year">Thống kê số lượng phim phát hành qua các năm</button>
+                                </li>
+                                <li><button id="plot-count-ratings">Thống kê số lượng phim theo rating</button></li>
+                                <li><button id="plot-level">Thống kê doanh thu theo mức</button></li>
+                                <li><button id="plot-correlation-revenue">Biểu đồ tương quan giữa doanh thu và
+                                        budget</button></li>
+                                <li><button id="plot-correlation-ratings-metascore">Biểu đồ tương quan giữa đánh giá của
+                                        người dùng và đánh giá của chuyên gia</button></li>
+                                <li><button id="plot-img">Biểu đồ tương quan giữa các features</button></li>
+                            </ul>
+                        </li>
+                        <li id="data" class="li-nav"><a id="dataId" href="#" class="a-nav">Data</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- const listGenres = ["Action", "Drama", "Comedy", "Documentary", "Thriller", "Romance", "Animation", "Family", "Horror", "Crime", "Adventure", "Fantasy", "Sci-Fi", "Mystery", "Biography", "History", "Sport", "Musical", "War", "Western"];
+            const listCountry = ['United States', 'South Africa', 'Germany', 'Spain', 'United Kingdom', 'France', 'Canada', 'China', 'India', 'Brazil', 'Bahamas', 'Netherlands', 'Australia', 'Japan', 'Malta', 'Mexico', 'Morocco', 'Ireland', 'Greece', 'Hungary', 'New Zealand', 'Romania', 'Austria', 'Italy', 'Sweden', 'Poland', 'Belgium', 'United Arab Emirates', 'Argentina', 'Denmark', 'Finland', 'Iceland', 'Norway', 'Switzerland', 'Luxembourg', 'Namibia', 'Bulgaria', 'Chile', 'Croatia', 'Paraguay', 'Uruguay', 'Turkey', 'Israel', 'Colombia', 'Thailand', 'Iran', 'Russia', 'Bosnia and Herzegovina', 'Slovakia', 'Kuwait', 'South Korea']; -->
+
+            <div class="body-predict" style="display: block;">
+                <h1>Dự đoán doanh thu phim</h1>
+                <form class="multi-input-form">
+                    <div class="col col-1">
+
+                        <div class="input-group">
+                            <label class="label">Predict Opening Weekend?</label>
+                            <div class="radio-container">
+                                <input type="radio" id="opening_week_0" name="input-opening_week" value="0" checked>
+                                <label for="opening_week_0">No</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="opening_week_1" name="input-opening_week" value="1">
+                                <label for="opening_week_1">Yes</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="input-movie_name" class="label">Movie name:</label>
+                            <input type="text" id="input-movie_name" name="input-movie_name">
+                        </div>
+                        <div class="release-date">
+                            <div class="input-group">
+                                <label for="input-month" class="label">Month:</label>
+                                <select class="sel-inp" id="input-month" name="input-month">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="input-year" class="label">Year:</label>
+                                <select class="sel-inp" id="input-year" name="input-year">
+                                    <!-- Loop through years from 1900 to 2024 -->
+                                    <!-- This part will be dynamically generated in the backend -->
+                                    <script>
+                                        for (let year = 2000; year <= 2024; year++) {
+                                            document.write(`<option value="${year}">${year}</option>`);
+                                        }
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="input-mpaa" class="label">MPAA:</label>
+                                <select id="input-mpaa" name="input-mpaa">
+                                    <option value="PG-13">PG-13</option>
+                                    <option value="G">G</option>
+                                    <option value="R">R</option>
+                                    <option value="PG">PG</option>
+                                    <option value="NC-17">NC-17</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="input-runtime" class="label">Runtime:</label>
+                            <input type="text" id="input-runtime" name="input-runtime">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="input-genres" class="label label-genres" id="label-genres">Genres: <div
+                                    id="genres-list"></div>
+                            </label>
+                            <input type="text" id="input-genres" name="input-genres">
+                            <div id="genre-suggestions"></div>
+                            <button type="button" id="add-genre-btn">Thêm</button>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="input-country" class="label label-country" id="label-country">Country: <div
+                                    id="country-list"></div>
+                            </label>
+                            <input type="text" id="input-country" name="input-country">
+                            <div id="country-suggestions"></div>
+                            <button type="button" id="add-country-btn">Thêm</button>
+                        </div>
+
+                        <!-- Col 2 -->
+                    </div>
+                    <div class="col col-2">
+                        <div class="input-group">
+                            <label for="input-budget" class="label">Budget:</label>
+                            <input type="text" id="input-budget" name="input-budget">
+                        </div>
+                        <div class="input-group">
+                            <label for="input-screens" class="label">Screens:</label>
+                            <input type="text" id="input-screens" name="input-screens">
+                        </div>
+                        <div class="input-group">
+                            <label for="input-critic-vote" class="label">Critic Vote:</label>
+                            <input type="text" id="input-critic-vote" name="input-critic-vote">
+                        </div>
+                        <div class="input-group">
+                            <label for="input-meta_score" class="label">Meta score:</label>
+                            <input type="text" id="input-meta_score" name="input-meta_score">
+                        </div>
+                        <div class="input-group" id="div-inp-user-vote">
+                            <label for="input-user-vote" class="label">User Vote:</label>
+                            <input type="text" id="input-user-vote" name="input-user-vote">
+                        </div>
+                        <div class="input-group" id="div-inp-ratings">
+                            <label for="input-ratings" class="label">Ratings:</label>
+                            <input type="text" id="input-ratings" name="input-ratings">
+                        </div>
+
+                        <div class="input-group">
+                            <label class="label">Sequel:</label>
+                            <div class="radio-container">
+                                <input type="radio" id="sequel-0" name="input-sequel" value="0">
+                                <label for="sequel-0">0</label>
+                            </div>
+                            <div class="radio-container">
+                                <input type="radio" id="sequel-1" name="input-sequel" value="1">
+                                <label for="sequel-1">1</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group" id="div-inp-opn-week">
+                            <label for="input-opening_week" class="label">Opening week:</label>
+                            <input type="text" id="input-opening_week" name="input-opening_week">
+                        </div>
+
+                        <div class="input-group btn-submit">
+                            <button type="submit" class="submit-button" id="submit-button">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="popup-overlay" id="popup-overlay">
+                    <div class="popup-result" id="table-predict-div">
+                        <h1>Kết quả dự đoán doanh thu</h1>
+                        <h2>Movie name: <span id="movie_name_h2"></span></h2>
+                        <table id="table-predict">
+                            <thead>
+                                <th><h2>Model</h2></th>
+                                <th><h2>Random Forest</h2></th>
+                                <th><h2>Gradient Boosting</h2></th>
+                                <th><h2>XGB</h2></th>
+                                <th><h2>LGBM</h2></th>
+                                <th><h2>Cat Boost</h2></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th><h2>Kết quả</h2></th>
+                                    <td><h2 id="result_rf"></h2></td>
+                                    <td><h2 id="result_gb"></h2></td>
+                                    <td><h2 id="result_xgb"></h2></td>
+                                    <td><h2 id="result_lgbm"></h2></td>
+                                    <td><h2 id="result_cb"></h2></td>
+                                </tr>
+                                <tr>
+                                    <th><h2>Lợi nhuận</h2></th>
+                                    <td><h2 id="loinhuan_rf"></h2></td>
+                                    <td><h2 id="loinhuan_gb"></h2></td>
+                                    <td><h2 id="loinhuan_xgb"></h2></td>
+                                    <td><h2 id="loinhuan_lgbm"></h2></td>
+                                    <td><h2 id="loinhuan_cb"></h2></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- <h1>Kết quả dự đoán doanh thu</h1>
+                        <h2>Movie name: <span id="movie_name_h2"></span></h2>
+                        <h3 class="h-result">Random Forest</h3>
+                        <h3 >Kết quả: <span id="result_rf"></span></h3>
+                        <h3 >Lợi nhuận: <span id="loinhuan_rf"></span></h3>
+                        <br>
+
+                        <h3 class="h-result">Gradient Boosting</h3>
+                        <h3 >Kết quả: <span id="result_gb"></span></h3>
+                        <h3 >Lợi nhuận: <span id="loinhuan_gb"></span></h3>
+                        <br>
+
+                        <h3 class="h-result">XGB</h3>
+                        <h3 >Kết quả: <span id="result_xgb"></span></h3>
+                        <h3 >Lợi nhuận: <span id="loinhuan_xgb"></span></h3>
+                        <br>
+
+                        <h3 class="h-result">LGBM</h3>
+                        <h3 >Kết quả: <span id="result_lgbm"></span></h3>
+                        <h3 >Lợi nhuận: <span id="loinhuan_lgbm"></span></h3>
+                        <br>
+
+                        <h3 class="h-result">Cat Boost</h3>
+                        <h3 >Kết quả: <span id="result_cb"></span></h3>
+                        <h3 >Lợi nhuận: <span id="loinhuan_cb"></span></h3>
+                        <br> -->
+
+                        <div class="div-chart" id="chart4-container" style="display: none;">
+                            <canvas id="bar4-chart"></canvas>
+                        </div>
+
+                        <button id="cancel-popup">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" style="display: none;">
+                <table id="table-content">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="radio" id="radio1" name="option" value="1" checked>
+                                    Genres
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="radio" id="radio2" name="option" value="2">
+                                    Country
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="choose-genres" id="choose-genres">
+                                    <option value="all-genres">All</option>
+                                    <option value="Action">Action</option>
+                                    <option value="Drama">Drama</option>
+                                    <option value="Comedy">Comedy</option>
+                                    <option value="Documentary">Documentary</option>
+                                    <option value="Thriller">Thriller</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Animation">Animation</option>
+                                    <option value="Family">Family</option>
+                                    <option value="Horror">Horror</option>
+                                    <option value="Crime">Crime</option>
+                                    <option value="Adventure">Adventure</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Sci_Fi">Sci-Fi</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Biography">Biography</option>
+                                    <option value="History">History</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Musical">Musical</option>
+                                    <option value="War">War</option>
+                                    <option value="Western">Western</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="choose-country" id="choose-country">
+                                    <option value="all-country">All</option>
+                                    <option value="United States">United States</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="France">France</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="China">China</option>
+                                    <option value="India">India</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="Bahamas">Bahamas</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="United Arab Emirates">United Arab Emirates</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="Iceland">Iceland</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Namibia">Namibia</option>
+                                    <option value="Bulgaria">Bulgaria</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="Croatia">Croatia</option>
+                                    <option value="Paraguay">Paraguay</option>
+                                    <option value="Uruguay">Uruguay</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Israel">Israel</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Iran">Iran</option>
+                                    <option value="Russia">Russia</option>
+                                    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                    <option value="Slovakia">Slovakia</option>
+                                    <option value="Kuwait">Kuwait</option>
+                                    <option value="South Korea">South Korea</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <div class="body-content">
+                    <div class="draw">
+                        <div id="div-chart-all" style="display: none;">
+                            <div class="div-chart" id="div-chart-all-genres">
+                                <canvas class="canvas-chart canvas-chart-all" id="bar-chart-all-genres"></canvas>
+                            </div>
+
+                            <div class="div-chart" id="div-chart-all-country">
+                                <canvas class="canvas-chart canvas-chart-all" id="bar-chart-all-country"></canvas>
+                            </div>
+                        </div>
+
+
+                        <div class="div-chart" id="div-chart-count" style="display: none;">
+                            <canvas class="canvas-chart" id="bar-chart-count"></canvas>
+                        </div>
+
+                        <div class="div-chart" id="div-chart-level" style="display: none;">
+                            <canvas class="canvas-chart" id="bar-chart-level"></canvas>
+                        </div>
+
+                        <div class="div-chart" id="div-chart-correlation-revenue" style="display: none;">
+                            <canvas class="canvas-chart" id="correlation-chart-revenue"></canvas>
+                        </div>
+
+                        <div class="div-chart" id="div-chart-correlation-ratings-metascore" style="display: none;">
+                            <canvas class="canvas-chart" id="correlation-chart-ratings-metascore"></canvas>
+                        </div>
+
+                        <div class="div-chart" id="div-chart-img" style="display: none;">
+                            <img src="../static/img/output.png" alt="Img">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="body-data" style="display: none;">
+                <table id="table-data">
+                    <!-- <thead>
+                        <th>1</th>
+                        <th>2</th>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>133</td>
+                            <td>2222222</td>
+                        </tr>
+                    </tbody> -->
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <script type="module" src="../static/js/main.js"></script>
+    <script src="../static/js/predict.js"></script>
+
+    <script>
+        let currentChartCount;
+        let currentChartLevel;
+        let currentChartAllGenres;
+        let currentChartAllCountry;
+        let currentChartCorrelationRevenue;
+        let currentChartCorrelationRatingsMetascore;
+    </script>
+</body>
+
+</html>

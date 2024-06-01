@@ -1,0 +1,108 @@
+Best model: Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['mpaa', 'budget', 'runtime',
+                                                   'screens', 'critic_vote',
+                                                   'Factor1', 'Factor2'])])),
+                ('regressor',
+                 RandomForestRegressor(max_depth=10, min_samples_split=10,
+                                       random_state=42))])
+Best parameters: {'regressor__max_depth': 10, 'regressor__min_samples_split': 10, 'regressor__n_estimators': 100}
+Best score: 0.4623895825065434
+Mean Squared Error (MSE): 3342700025904995.0
+Root Mean Squared Error (RMSE): 57816087.95054362
+Mean Absolute Error (MAE): 28176590.28569769
+R^2 Score: 0.5093427600801996
+Cross-validated RMSE scores: [0.69568773 0.66880239 0.73727687 0.65483303 0.69202733]
+Mean RMSE: 0.6897254686463195
+Standard deviation of RMSE: 0.028132686910023737
+----------------------------------------------------------------
+
+
+Best model: Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['mpaa', 'budget', 'runtime',
+                                                   'screens', 'critic_vote',
+                                                   'Factor1', 'Factor2'])])),
+                ('regressor', GradientBoostingRegressor(random_state=42))])
+Best parameters: {'regressor__learning_rate': 0.1, 'regressor__max_depth': 3, 'regressor__n_estimators': 100}
+Best score: 0.4568020621516437
+Mean Squared Error (MSE): 3377718929423691.5
+Root Mean Squared Error (RMSE): 58118146.300649434
+Mean Absolute Error (MAE): 27321723.916027155
+R^2 Score: 0.5042025206293534
+Cross-validated RMSE scores: [0.70387935 0.67020247 0.73354747 0.65752908 0.67827515]
+Mean RMSE: 0.6886867018589721
+Standard deviation of RMSE: 0.027070905204939145
+----------------------------------------------------------------
+
+
+Best model: Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['mpaa', 'budget', 'runtime',
+                                                   'screens', 'critic_vote',
+                                                   'Factor1', 'Factor2'])])),
+                ('regressor',
+                 XGBRegressor(base_score=None, booster=None, callbacks=None,
+                              colsample_bylevel=None, colsample_bynode=None,
+                              colsample_bytree=None, device=None,
+                              early_stopping_rounds=None,
+                              enable_cat...
+                              feature_types=None, gamma=None, grow_policy=None,
+                              importance_type=None,
+                              interaction_constraints=None, learning_rate=0.1,
+                              max_bin=None, max_cat_threshold=None,
+                              max_cat_to_onehot=None, max_delta_step=None,
+                              max_depth=5, max_leaves=None,
+                              min_child_weight=None, missing=nan,
+                              monotone_constraints=None, multi_strategy=None,
+                              n_estimators=50, n_jobs=None,
+                              num_parallel_tree=None, random_state=42, ...))])
+Best parameters: {'regressor__learning_rate': 0.1, 'regressor__max_depth': 5, 'regressor__n_estimators': 50, 'regressor__subsample': 0.9}
+Best score: 0.4598524890099894
+Mean Squared Error (MSE): 3351478391709000.0
+Root Mean Squared Error (RMSE): 57891954.46440723
+Mean Absolute Error (MAE): 27818324.18909889
+R^2 Score: 0.5080542302381498
+Cross-validated RMSE scores: [0.69601625 0.67540123 0.71809999 0.65322581 0.69248636]
+Mean RMSE: 0.6870459293020403
+Standard deviation of RMSE: 0.02169709196333483
+----------------------------------------------------------------
+
+
+Best model: Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['mpaa', 'budget', 'runtime',
+                                                   'screens', 'critic_vote',
+                                                   'Factor1', 'Factor2'])])),
+                ('regressor', LGBMRegressor(n_estimators=50, random_state=42))])
+Best parameters: {'regressor__learning_rate': 0.1, 'regressor__max_depth': -1, 'regressor__n_estimators': 50, 'regressor__num_leaves': 31}
+Best score: 0.4719270527859153
+Mean Squared Error (MSE): 3168978026437136.5
+Root Mean Squared Error (RMSE): 56293676.61147331
+Mean Absolute Error (MAE): 27780978.369619828
+R^2 Score: 0.5348424926651394
+Cross-validated RMSE scores: [0.71283005 0.67402135 0.73565349 0.66012231 0.69492001]
+Mean RMSE: 0.6955094402251925
+Standard deviation of RMSE: 0.02692910170513272
+----------------------------------------------------------------
+
+
+Best model: Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['mpaa', 'budget', 'runtime',
+                                                   'screens', 'critic_vote',
+                                                   'Factor1', 'Factor2'])])),
+                ('regressor',
+                 <catboost.core.CatBoostRegressor object at 0x0000024C1AA5DE50>)])
+Best parameters: {'regressor__depth': 4, 'regressor__iterations': 150, 'regressor__l2_leaf_reg': 5, 'regressor__learning_rate': 0.1}
+Best score: 0.45142997711998933
+Mean Squared Error (MSE): 3171881006483966.5
+Root Mean Squared Error (RMSE): 56319454.95549443
+Mean Absolute Error (MAE): 27248551.235335954
+R^2 Score: 0.5344163795929877
+Cross-validated RMSE scores: [0.70352262 0.65435766 0.72050652 0.64819548 0.66413009]
+Mean RMSE: 0.6781424748735192
+Standard deviation of RMSE: 0.0286277874831748
+----------------------------------------------------------------
+
+

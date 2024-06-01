@@ -1,0 +1,149 @@
+::-webkit-scrollbar {
+    width: 0; /* Ẩn thanh cuộn ngang */
+    height: 0; /* Ẩn thanh cuộn dọc */
+}
+
+body {
+    overflow: scroll; /* Đảm bảo nội dung có thể cuộn */
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.ul-nav {
+    text-align: center;
+    padding-left: 0px;
+}
+
+.li-nav{
+    display:inline-block;
+    padding: 20px 40px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 30px;   
+    transition: transform 0.3s ease;
+}
+
+.li-nav:hover {
+    transform: translateY(-5px);
+}
+
+.a-nav {
+    text-decoration: none;
+    color: black;
+    background-color: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.a-nav:hover {
+    color: rgb(53, 53, 53);
+}
+
+.nav-bar {
+    background-color: aliceblue;
+}
+
+.body-content {
+    width: 75% !important;
+    height: 75% !important;
+    margin: auto;
+}
+
+/* .draw {
+    display: flex !important;
+}
+
+.canvas-chart-all {
+    width: 700px !important;
+    height: 350px !important;
+} */
+
+#plot ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-left: 50px;
+}
+
+.li-nav {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -110px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 300px;
+}
+
+.dropdown li {
+    display: block;
+    text-align: center;
+}
+
+.dropdown li button {
+    width: 100%;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    background-color: #f9f9f9;
+    font-size: 20px;
+    border: none;
+    text-align: center !important;
+}
+
+.dropdown li button:hover {
+    background-color: #ddd;
+}
+
+.li-nav:hover .dropdown {
+    display: block;
+}
+
+#div-chart-img {
+    text-align: center;
+}
+
+img {
+    width: 60%;
+}
+
+.body-data table {
+    margin: 40px 40px;
+}
+
+.body-data th,.body-data td {
+    text-align: center;
+}
+
+.body-data table,.body-data th,.body-data tr,.body-data td {
+    padding: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#table-predict-div table {
+    margin: 40px 40px;
+}
+
+#table-predict-div th,#table-predict-div td {
+    text-align: center;
+}
+
+#table-predict-div table, #table-predict-div th, #table-predict-div tr, #table-predict-div td {
+    padding: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.th_genres {
+    width: 600px;
+}
+

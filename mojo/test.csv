@@ -1,0 +1,6 @@
+tt_id,rl_id,movie_name,month,year,budget,runtime,genres,mpaa,screens,opening_week,domestic_box_office
+tt0385635,rl575440385,Dans une galaxie pr�s de chez vous - Le film,4,2004,None,109,Adventure Comedy Sci-Fi,None,74,None,2259688
+tt0365957,rl2491057665,You Got Served,1,2004,8000000,95,Drama Music,PG-13,1943,16123105,40363810
+tt0286244,rl2255980033,The Triplets of Belleville,11,2003,None,80,Adventure Animation Comedy Drama Music Sport,PG-13,463,108080,7007149
+tt0317910,rl240289281,The Fog of War,12,2003,None,107,Biography Documentary History War,PG-13,261,41449,4198566
+tt0337741,rl1299219969,Something's Gotta Give,12,2003,80000000,128,Comedy Drama Romance,PG-13,2876,16064723,124728738

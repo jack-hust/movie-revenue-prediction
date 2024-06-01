@@ -1,0 +1,4 @@
+movie_name,domestic_box_office,budget,month,year,opening_week,screens,genres,mpaa,runtime,user_vote,ratings,country,critic_vote,meta_score,sequel
+Mean Girls,72404248,36000000.0,1,2024,28635307.0,3791.0,Comedy Musical,PG-13,112,28000.0,5.7,United States,290.0,67.22,0.0
+The Beekeeper,66220535,35000000.0,1,2024,16576007.0,3303.0,Action Thriller,R,105,98000.0,6.4,United States United Kingdom,213.0,67.96,0.0
+Night Swim,32494740,15000000.0,1,2024,11797155.0,3250.0,Horror Thriller,PG-13,98,19000.0,4.7,United States United Kingdom Australia,202.0,24.49,0.0
