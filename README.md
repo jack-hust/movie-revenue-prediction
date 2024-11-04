@@ -46,7 +46,6 @@ Những gì bạn cần cài đặt để phần mềm hoạt động:
 
 ## Tính năng cập nhật dữ liệu chạy trên server
 
-Trước tiên cần chạy Runners action local bằng cách liên hệ với chủ repo `QuanTH02`. Khi đã có folder `actions-runner`, thực hiện các bước sau:
 
 1. Di chuyển vào thư mục `actions-runner`
 
